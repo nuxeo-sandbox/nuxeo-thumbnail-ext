@@ -1,0 +1,9 @@
+<component name="org.nuxeo.labs.thumbnail.ext.thumbnail">
+
+    <require>org.nuxeo.ecm.platform.thumbnail.service.thumbnailfactory</require>
+
+    <extension point="thumbnailFactory" target="org.nuxeo.ecm.core.api.thumbnail.ThumbnailService">
+        <thumbnailFactory factoryClass="org.nuxeo.labs.thumbnail.ext.DocumentThumbnailExtFactory" name="thumbnailExtFactory"/>
+    </extension>
+
+</component>
