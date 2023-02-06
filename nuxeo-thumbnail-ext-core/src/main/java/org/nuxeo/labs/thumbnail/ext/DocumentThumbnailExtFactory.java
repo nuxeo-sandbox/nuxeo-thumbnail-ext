@@ -19,9 +19,16 @@
 
 package org.nuxeo.labs.thumbnail.ext;
 
+import static org.nuxeo.ecm.platform.thumbnail.ThumbnailConstants.ANY_TO_THUMBNAIL_CONVERTER_NAME;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.nuxeo.common.utils.FileUtils;
 import org.nuxeo.ecm.core.api.Blob;
 import org.nuxeo.ecm.core.api.Blobs;
@@ -35,16 +42,9 @@ import org.nuxeo.ecm.platform.thumbnail.factories.ThumbnailDocumentFactory;
 import org.nuxeo.ecm.platform.types.adapter.TypeInfo;
 import org.nuxeo.runtime.api.Framework;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-
-import static org.nuxeo.ecm.platform.thumbnail.ThumbnailConstants.ANY_TO_THUMBNAIL_CONVERTER_NAME;
-
 public class DocumentThumbnailExtFactory extends ThumbnailDocumentFactory {
 
-    private static final Log log = LogFactory.getLog(DocumentThumbnailExtFactory.class);
+    private static final Logger log = LogManager.getLogger(DocumentThumbnailExtFactory.class);
 
     public static final String THUMBNAIL_FORMAT = "image/png";
 

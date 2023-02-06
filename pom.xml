@@ -4,12 +4,12 @@
   <parent>
     <groupId>org.nuxeo</groupId>
     <artifactId>nuxeo-parent</artifactId>
-    <version>2021.33</version>
+    <version>2023.0</version>
   </parent>
 
   <groupId>org.nuxeo.labs.thumbnail.ext</groupId>
   <artifactId>nuxeo-thumbnail-ext-parent</artifactId>
-  <version>2021.2.0-SNAPSHOT</version>
+  <version>2023.0.0-SNAPSHOT</version>
   <name>Nuxeo thumbnail ext parent</name>
   <description>An extension for better thumbnail generation</description>
   <packaging>pom</packaging>
@@ -17,7 +17,7 @@
   <properties>
     <!-- Skip Nuxeo enforcer rules by default -->
     <nuxeo.skip.enforcer>true</nuxeo.skip.enforcer>
-    <nuxeo.target.version>2021.*</nuxeo.target.version>
+    <nuxeo.target.version>2023.*</nuxeo.target.version>
   </properties>
 
   <modules>
