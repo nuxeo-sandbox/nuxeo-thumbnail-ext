@@ -9,7 +9,7 @@
 
   <groupId>org.nuxeo.labs.thumbnail.ext</groupId>
   <artifactId>nuxeo-thumbnail-ext-parent</artifactId>
-  <version>2021.1.0-SNAPSHOT</version>
+  <version>2021.2.0-SNAPSHOT</version>
   <name>Nuxeo thumbnail ext parent</name>
   <description>An extension for better thumbnail generation</description>
   <packaging>pom</packaging>
