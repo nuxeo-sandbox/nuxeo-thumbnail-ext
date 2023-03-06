@@ -28,6 +28,7 @@ import org.nuxeo.ecm.core.api.Blobs;
 import org.nuxeo.ecm.core.api.CoreSession;
 import org.nuxeo.ecm.core.api.DocumentModel;
 import org.nuxeo.ecm.core.api.blobholder.BlobHolder;
+import org.nuxeo.ecm.core.api.blobholder.SimpleBlobHolder;
 import org.nuxeo.ecm.core.convert.api.ConversionService;
 import org.nuxeo.ecm.platform.mimetype.interfaces.MimetypeRegistry;
 import org.nuxeo.ecm.platform.thumbnail.factories.ThumbnailDocumentFactory;
@@ -36,6 +37,7 @@ import org.nuxeo.runtime.api.Framework;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import static org.nuxeo.ecm.platform.thumbnail.ThumbnailConstants.ANY_TO_THUMBNAIL_CONVERTER_NAME;
@@ -55,6 +57,9 @@ public class DocumentThumbnailExtFactory extends ThumbnailDocumentFactory {
             List<String> converterNames = conversionService.getConverterNames(blob.getMimeType(), THUMBNAIL_FORMAT);
             if (converterNames.contains(ANY_TO_THUMBNAIL_CONVERTER_NAME)) {
                 return super.computeThumbnail(doc, session);
+            } else if (!converterNames.isEmpty()) {
+                BlobHolder converted =  conversionService.convert(converterNames.get(0),new SimpleBlobHolder(blob),new HashMap<>());
+                return converted.getBlob();
             } else {
                 log.warn(String.format("%s converter doesn't support %s", ANY_TO_THUMBNAIL_CONVERTER_NAME, blob.getMimeType()));
             }
@@ -80,7 +85,7 @@ public class DocumentThumbnailExtFactory extends ThumbnailDocumentFactory {
             if (iconPath != null) {
                 try {
                     File iconFile = FileUtils.getResourceFileFromContext("nuxeo.war" + File.separator + iconPath);
-                    if (iconFile.exists()) {
+                    if (iconFile!= null && iconFile.exists()) {
                         MimetypeRegistry mimetypeRegistry = Framework.getService(MimetypeRegistry.class);
                         String mimeType = mimetypeRegistry.getMimetypeFromFile(iconFile);
                         if (mimeType == null) {
