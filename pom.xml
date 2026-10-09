@@ -1,38 +1,37 @@
-<?xml version="1.0"?>
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.nuxeo</groupId>
     <artifactId>nuxeo-parent</artifactId>
-    <version>2023.0</version>
+    <version>2025.24</version>
   </parent>
-
   <groupId>org.nuxeo.labs.thumbnail.ext</groupId>
   <artifactId>nuxeo-thumbnail-ext-parent</artifactId>
-  <version>2023.1.0-SNAPSHOT</version>
+  <version>2025.1.0-SNAPSHOT</version>
   <name>Nuxeo thumbnail ext parent</name>
   <description>An extension for better thumbnail generation</description>
   <packaging>pom</packaging>
-
   <properties>
     <!-- Skip Nuxeo enforcer rules by default -->
     <nuxeo.skip.enforcer>true</nuxeo.skip.enforcer>
-    <nuxeo.target.version>2023.*</nuxeo.target.version>
+    <nuxeo.target.version>2025.*</nuxeo.target.version>
+    <pushReleaseChanges>false</pushReleaseChanges>
   </properties>
-
   <modules>
     <module>nuxeo-thumbnail-ext-core</module>
     <module>nuxeo-thumbnail-ext-package</module>
   </modules>
-
-  <scm />
-  <licenses />
-  <mailingLists />
-  <issueManagement />
-  <ciManagement />
-  <developers />
-  <distributionManagement />
-
+  <scm>
+    <connection>scm:git:${project.scm.url}</connection>
+    <developerConnection>scm:git:${project.scm.url}</developerConnection>
+    <url>https://github.com/nuxeo-sandbox/nuxeo-thumbnail-ext</url>
+  </scm>
+  <licenses/>
+  <mailingLists/>
+  <issueManagement/>
+  <ciManagement/>
+  <developers/>
+  <distributionManagement/>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -47,7 +46,6 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
-
   <repositories>
     <repository>
       <id>maven-public</id>
@@ -61,7 +59,7 @@
       </snapshots>
     </repository>
     <repository>
-      <id>maven-internal</id>
+      <id>maven-private</id>
       <url>https://packages.nuxeo.com/repository/maven-internal/</url>
       <releases>
         <enabled>true</enabled>
@@ -83,7 +81,6 @@
       </snapshots>
     </repository>
   </repositories>
-
   <pluginRepositories>
     <pluginRepository>
       <id>maven-public</id>
@@ -96,4 +93,29 @@
       </snapshots>
     </pluginRepository>
   </pluginRepositories>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-release-plugin</artifactId>
+        <version>3.1.1</version>
+        <configuration>
+          <projectVersionPolicyId>SemVerVersionPolicy</projectVersionPolicyId>
+          <tagNameFormat>@{project.version}</tagNameFormat>
+          <autoVersionSubmodules>true</autoVersionSubmodules>
+          <scmReleaseCommitComment>Release @{releaseLabel}</scmReleaseCommitComment>
+          <scmDevelopmentCommitComment>Post Release @{releaseLabel}</scmDevelopmentCommitComment>
+          <pushChanges>${pushReleaseChanges}</pushChanges>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>versions-maven-plugin</artifactId>
+        <version>2.18.0</version>
+        <configuration>
+          <ruleSet/>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>
